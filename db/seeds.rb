@@ -6,7 +6,7 @@ require 'open-uri'
 
 character_list = []
 
-for i in 1..7 do
+for i in 1..25 do
 	url = "http://swapi.co/api/people/#{i}/"
 	begin
 		json = open(url)
