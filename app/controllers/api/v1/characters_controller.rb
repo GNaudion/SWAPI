@@ -10,10 +10,17 @@ module Api::V1
 			render json: @character
 		end
 
+		def update
+			@character = Character.find(params[:id])
+			@character.update_attributes(character_params)
+			render json: @character
+		end
+		
+
 		private 
 		
 		def character_params
-			params.require(:character).permit(:name, :species, :yearofbirth, :gender)
+			params.require(:character).permit(:name, :species, :yearofbirth, :birth, :gender)
 		end
 	end
 end

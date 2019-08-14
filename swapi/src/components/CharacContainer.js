@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Charac from './Charac'
+import Character from './Character'
 import update from 'immutability-helper'
 import CharacterForm from './CharacterForm'
 
@@ -9,7 +9,8 @@ class CharacContainer extends Component {
 		super(props)
 		this.state = {
 			characters: [],
-			editingCharacterId: null
+			editingCharacterId: '',
+			notification: ''
 		}
 	}	
 
@@ -22,14 +23,13 @@ class CharacContainer extends Component {
 		.catch(error => console.log(error))
 	}
 
-	addNewCharacter = () => {
-		//document.write("yolo")
+	addNewCharacter = () => {	
 		axios.post(
 			'http://localhost:3001/api/v1/characters',
 			{ character: 
 				{
 				name: '',
-				species: [],
+				species: '',
 				yearofbirth:'',					
 				gender: ''	
 				}
@@ -40,13 +40,22 @@ class CharacContainer extends Component {
 			const characters = update(this.state.characters, {
 				$splice: [[0,0,response.data]]
 			})
-		
+			
 			this.setState({
 				characters: characters,
 				editingCharacterId: response.data.id
 			})
 			.catch(error=> console.log(error))
+		})		
+	}
+	
+	updateCharacter = (character) => {
+		const characterIndex = this.state.characters.findIndex(x => x.id === character.id)
+		const characters = update(this.state.characters, {
+			[characterIndex]: { $set: character }
 		})
+		this.setState({characters:characters, notification: 'success'})
+
 	}
 
 	render(){
@@ -58,15 +67,18 @@ class CharacContainer extends Component {
 					<button onClick={this.addNewCharacter}> 
 						Add Character
 					</button>
+					<span className="notification">
+						{this.state.notification}
+					</span>
 				</div>
 				
 				{this.state.characters.map((character) => {
 					if(this.state.editingCharacterId === character.id){
 						return(
-							<CharacterForm character={character} key={character.id} />
+							<CharacterForm character={character} key={character.id} updateCharacter={this.updateCharacter} />
 						)
 					}else{
-						return(<Charac character={character} key={character.id} />)
+						return(<Character character={character} key={character.id} />)
 					}
 				})}
 			</div>
