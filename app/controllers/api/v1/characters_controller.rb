@@ -15,7 +15,6 @@ module Api::V1
 			@character.update_attributes(character_params)
 			render json: @character
 		end
-		
 
 		private 
 		

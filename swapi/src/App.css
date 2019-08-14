@@ -13,14 +13,17 @@
 }
 
 .info{
-  
+  display: none;
 }
 
 
 .charac{
   margin-left: 15px;
-  height: 160px;
   background: grey;
+}
+
+.charac:hover .info{
+  display: block;
 }
 
 .input{

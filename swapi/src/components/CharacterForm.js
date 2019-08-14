@@ -22,17 +22,17 @@ class CharacterForm extends Component{
 			species: this.state.species,
 			yearofbirth: this.state.yearofbirth,
 			gender: this.state.gender
-		}
+		}//Les infos envoyées
 		const url = `http://localhost:3001/api/v1/characters/${this.props.character.id}`
 		axios.put(
 			url,
 			{character: character}
-		)
+		) //La requête ne marche pas...
 		.then(response => {
 			console.log(response)
 			this.props.updateCharacter(response.data)	
 		})
-		.catch(error => console.log(error))
+		.catch(error => {console.log(error)}) //Request Aborted
 	}
 
 	
