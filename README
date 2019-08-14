@@ -1,0 +1,16 @@
+Ceci est une application utilisant ruby on rails et ReactJS donnant une liste de personnage tirée de swapi.co, ainsi que certaines infos liées à ces personnages.
+
+Il est possible d'ajouter de nouveaux personnages, ou d'éditer les propriétés de ces derniers (en cours de développement)
+
+Le développement a été grandement aidé par le tutoriel suivant : sitepoint.com/react-rails-5-1/
+
+Les appels api sont effectués grace au gem open-uri.
+
+Une version idéale trouvée sur internet : swapi-blogpost.herokuapp.com (la gestion de la database est différente)
+
+Pour plus d'infos sur la création de la database des personnages, consulter db/seed.rb
+
+La partie ReactJS se trouve dans le dossier swapi/
+
+Déploiement sur Heroku à venir.
+
