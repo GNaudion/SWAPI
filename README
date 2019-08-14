@@ -12,5 +12,9 @@ Pour plus d'infos sur la création de la database des personnages, consulter db/
 
 La partie ReactJS se trouve dans le dossier swapi/
 
+Le passage à la database lors des requêtes axios.put et axios.delete (dans CharacterContainer) pose problème. Dans les deux cas le paramètre fourni ne semble pas être reçu par le back (WHERE "character"."id" = ? suivi d'un ["id" = 18 (par exemple) ]) Les fonctions de suppression et d'ajout de personnage sont donc incomplètes (La correction devrait débloquer cela).
+
+En raison du temps passer sur le problème sus-cité, la fonction de modification n'a pas été prise en compte.
+
 Déploiement sur Heroku à venir.
 

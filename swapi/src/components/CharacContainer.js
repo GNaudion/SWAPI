@@ -58,6 +58,17 @@ class CharacContainer extends Component {
 
 	}
 
+	onDelete = (id) => {
+		const url = `http://localhost:3001/api/v1/characters/${id}`	
+		axios.delete(url)
+		.then(response => {
+			const characterIndex = this.state.character.findIndex(x => x.id === id)
+			const characters = update(this.state.characters, {$splice: [[characterIndex, 1]]})
+			this.setState({characters: characters})
+		})
+		.catch(error => console.log(error))
+	}
+
 	render(){
 		return(
 
@@ -78,7 +89,7 @@ class CharacContainer extends Component {
 							<CharacterForm character={character} key={character.id} updateCharacter={this.updateCharacter} />
 						)
 					}else{
-						return(<Character character={character} key={character.id} />)
+						return(<Character character={character} key={character.id} onDelete={this.onDelete} />)
 					}
 				})}
 			</div>

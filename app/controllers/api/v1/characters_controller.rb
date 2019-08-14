@@ -16,6 +16,15 @@ module Api::V1
 			render json: @character
 		end
 
+		def destroy
+			@character = Character.find(params[:id])
+			if @character.destroy
+				head :no_content, status: :ok
+			else
+				render json: @character.errors, status: :unprocessable_entity
+			end
+		end
+
 		private 
 		
 		def character_params
